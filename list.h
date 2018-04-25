@@ -24,6 +24,7 @@ typedef unsigned long size_t;
 #define LIST_POSITION1 ((void *) 0x00100100)
 #define LIST_POSITION2 ((void *) 0x00200200)
 
+/*链表指针：指向上一个和下一个*/
 struct list_head {
 	struct list_head *next, *prev;
 };
@@ -42,13 +43,14 @@ struct list_head {
 #define list_entry(ptr, type, member) \
 	container_of(ptr, type, member)
 
+/*链表初始化：头尾均是自身*/
 static inline void INIT_LIST_HEAD(struct list_head *list)
 {
     list->next = list;
     list->prev = list;
 }
 
-/**
+/**遍历链表：每次只想下一个，回到头则结束
  * list_for_each	-	iterate over list 
  * @pos:	the type * to use as a loop cursor.
  * @head:	the head for your list.
@@ -56,7 +58,7 @@ static inline void INIT_LIST_HEAD(struct list_head *list)
  */
 #define list_for_each(pos, head) for (pos = (head)->next; pos != (head); pos = pos->next)
 
-/**
+/**反向遍历链表
  * list_for_each_r	-	iterate over list 
  *
  */
