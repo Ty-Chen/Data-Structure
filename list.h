@@ -50,7 +50,7 @@ static inline void INIT_LIST_HEAD(struct list_head *list)
     list->prev = list;
 }
 
-/**遍历链表：每次只想下一个，回到头则结束
+/**遍历链表：每次指向下一个，回到头则结束
  * list_for_each	-	iterate over list 
  * @pos:	the type * to use as a loop cursor.
  * @head:	the head for your list.
