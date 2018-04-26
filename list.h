@@ -11,6 +11,11 @@ typedef unsigned long size_t;
  * @type:       the type of the container struct this is embedded in.
  * @member:     the name of the member within the struct.
  *
+ * 注明内核源码函数，经常见到
+ * It takes three arguments – a pointer, type of the container,
+ * and the name of the member the pointer refers to. 
+ * The macro will then expand to a new address pointing 
+ * to the container which accommodates the respective member. 
  */
 #define container_of(ptr, type, member) ({                      \
 	const typeof( ((type *)0)->member ) *__mptr = (ptr);    \
