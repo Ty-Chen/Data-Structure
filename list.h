@@ -71,6 +71,7 @@ static inline void INIT_LIST_HEAD(struct list_head *list)
 #define list_for_each_r(pos, head) for (pos = (head)->prev; pos != (head); pos = pos->prev)
 
 /**
+ * 添加链表表项
  * insert a new entry between two known consecutive entries.
  *
  * This is only for internal list manipulation where we konw
