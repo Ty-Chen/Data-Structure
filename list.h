@@ -3,8 +3,9 @@
 typedef unsigned short u16;
 typedef unsigned int u32;
 typedef unsigned long size_t;
-#define offsetof(TYPE, MEMBER) ((size_t) &((TYPE *)0)->MEMBER)
 
+/*本句宏定义实现了偏移量的计算*/
+#define offsetof(TYPE, MEMBER) ((size_t) &((TYPE *)0)->MEMBER)
 
 /**
  * container_of - cast a member of a structure out to the containing structure
@@ -12,7 +13,7 @@ typedef unsigned long size_t;
  * @type:       the type of the container struct this is embedded in.
  * @member:     the name of the member within the struct.
  *
- * 注明内核源码函数，经常见到
+ * 著名内核源码函数，经常见到，作用是获取type类型中member变量的内存位置
  * It takes three arguments – a pointer, type of the container,
  * and the name of the member the pointer refers to. 
  * The macro will then expand to a new address pointing 
@@ -41,6 +42,7 @@ struct list_head {
 	struct list_head name = LIST_HEAD_INIT(name)
 
 /**
+ * 链表入口
  * list_entry - get the struct for this entry
  * @ptr:	the &struct list_head pointer.
  * @type:	the type of the struct this is embedded in.
@@ -88,6 +90,7 @@ static inline void __list_add(struct list_head *new,
 }
 
 /**
+ * 添加新的链表项
  * list_add    -     add a new entry
  * @new: new entry to be added
  * @head: list head to add it after
@@ -101,6 +104,7 @@ static inline void list_add(struct list_head *new, struct list_head *head)
 }
 
 /**
+ * 在尾部添加新链表项
  * list_add_tail    -     add a new entry
  * @new: new entry to be added
  * @head: list head to add it before
@@ -114,7 +118,7 @@ static inline void list_add_tail(struct list_head *new, struct list_head *head)
 }
 
 /*
- * Delete a list entry by making the prev/nextentries
+ * Delete a list entry by making the prev/next entries
  * point to each other
  *
  * This is only for internal list manipulation where we know
