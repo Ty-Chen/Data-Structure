@@ -3,6 +3,8 @@
 typedef unsigned short u16;
 typedef unsigned int u32;
 typedef unsigned long size_t;
+
+/*本句宏定义实现了偏移量的计算*/
 #define offsetof(TYPE, MEMBER) ((size_t) &((TYPE *)0)->MEMBER)
 
 /**
@@ -11,6 +13,11 @@ typedef unsigned long size_t;
  * @type:       the type of the container struct this is embedded in.
  * @member:     the name of the member within the struct.
  *
+ * 著名内核源码函数，经常见到，作用是获取type类型中member变量的内存位置
+ * It takes three arguments – a pointer, type of the container,
+ * and the name of the member the pointer refers to. 
+ * The macro will then expand to a new address pointing 
+ * to the container which accommodates the respective member. 
  */
 #define container_of(ptr, type, member) ({                      \
 	const typeof( ((type *)0)->member ) *__mptr = (ptr);    \
@@ -24,6 +31,7 @@ typedef unsigned long size_t;
 #define LIST_POSITION1 ((void *) 0x00100100)
 #define LIST_POSITION2 ((void *) 0x00200200)
 
+/*链表指针：指向上一个和下一个*/
 struct list_head {
 	struct list_head *next, *prev;
 };
@@ -34,6 +42,7 @@ struct list_head {
 	struct list_head name = LIST_HEAD_INIT(name)
 
 /**
+ * 链表入口
  * list_entry - get the struct for this entry
  * @ptr:	the &struct list_head pointer.
  * @type:	the type of the struct this is embedded in.
@@ -42,13 +51,14 @@ struct list_head {
 #define list_entry(ptr, type, member) \
 	container_of(ptr, type, member)
 
+/*链表初始化：头尾均是自身*/
 static inline void INIT_LIST_HEAD(struct list_head *list)
 {
     list->next = list;
     list->prev = list;
 }
 
-/**
+/**遍历链表：每次指向下一个，回到头则结束
  * list_for_each	-	iterate over list 
  * @pos:	the type * to use as a loop cursor.
  * @head:	the head for your list.
@@ -56,13 +66,14 @@ static inline void INIT_LIST_HEAD(struct list_head *list)
  */
 #define list_for_each(pos, head) for (pos = (head)->next; pos != (head); pos = pos->next)
 
-/**
+/**反向遍历链表
  * list_for_each_r	-	iterate over list 
  *
  */
 #define list_for_each_r(pos, head) for (pos = (head)->prev; pos != (head); pos = pos->prev)
 
 /**
+ * 添加链表表项
  * insert a new entry between two known consecutive entries.
  *
  * This is only for internal list manipulation where we konw
@@ -79,6 +90,7 @@ static inline void __list_add(struct list_head *new,
 }
 
 /**
+ * 添加新的链表项
  * list_add    -     add a new entry
  * @new: new entry to be added
  * @head: list head to add it after
@@ -92,6 +104,7 @@ static inline void list_add(struct list_head *new, struct list_head *head)
 }
 
 /**
+ * 在尾部添加新链表项
  * list_add_tail    -     add a new entry
  * @new: new entry to be added
  * @head: list head to add it before
@@ -105,7 +118,7 @@ static inline void list_add_tail(struct list_head *new, struct list_head *head)
 }
 
 /*
- * Delete a list entry by making the prev/nextentries
+ * Delete a list entry by making the prev/next entries
  * point to each other
  *
  * This is only for internal list manipulation where we know
