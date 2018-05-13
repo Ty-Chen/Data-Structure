@@ -6,5 +6,7 @@ int main()
 {
 	LIST_HEAD(list);
 	printf("complete a simple list\n");
+	/* We test list here*/
+	
 	//getchar();
 }
