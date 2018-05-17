@@ -6,7 +6,7 @@ typedef struct data_list
 {
 	int  test_int_data;
 	char test_char_data; 
-	struct list_head list;
+	struct list_head *list;
 }data_list;
 
 
@@ -33,12 +33,26 @@ int main()
 	printf("We define a new pointer ptr to struct data_list\n");
 	printf("After container_of, the values are as follow\n");
 	printf("ptr->test_int_data = %d\n", ptr->test_int_data);
-	printf("ptr->test_char_data = %c\n", ptr->test_char_data);
+	printf("ptr->test_char_data = %c\n", ptr->test_char_data); 
 
 	/* We test list here*/	
 	printf("\n-------We test the list-------\n");
-	list_add( &(data.list), &head);
+	list_add( data.list, &head);
+	printf("error?");
+	data_list data2;
+	data2.test_int_data = 456;
+	data2.test_char_data = 'b';
+	list_add( data2.list, &head);
 
+	printf("Test list_for_each\n");
+	data_list *pos = NULL;
+	pos = (data_list *) malloc(sizeof(data_list));
+	
+	list_for_each( pos->list, &head)
+	{
+		printf("\nint_data = %d\n", pos->test_int_data);
+		printf("char_data = %c", pos->test_char_data);
+	}
 	
 	//getchar();
 }
