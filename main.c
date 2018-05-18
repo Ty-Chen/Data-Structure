@@ -6,16 +6,12 @@ typedef struct data_list
 {
 	int  test_int_data;
 	char test_char_data; 
-	struct list_head *list;
+	struct list_head list;
 }data_list;
 
 
 int main()
-{
-	//LIST_HEAD(list);
-
-	LIST_HEAD(head);
-	
+{	
 	data_list data;
 	data.test_int_data = 123;
 	data.test_char_data = 'a';
@@ -37,21 +33,26 @@ int main()
 
 	/* We test list here*/	
 	printf("\n-------We test the list-------\n");
-	list_add( data.list, &head);
-	printf("error?");
+
+	struct list_head head;
+	INIT_LIST_HEAD(&head);	
+	
+	list_add( &data.list, &head);
+	
 	data_list data2;
 	data2.test_int_data = 456;
 	data2.test_char_data = 'b';
-	list_add( data2.list, &head);
+	list_add( &data2.list, &head);
 
 	printf("Test list_for_each\n");
-	data_list *pos = NULL;
-	pos = (data_list *) malloc(sizeof(data_list));
 	
-	list_for_each( pos->list, &head)
+	struct list_head *pos;
+	
+	list_for_each( pos, &head)
 	{
-		printf("\nint_data = %d\n", pos->test_int_data);
-		printf("char_data = %c", pos->test_char_data);
+		data_list *plist = list_entry(pos, data_list, list);
+		printf("\nint_data = %d\n", plist->test_int_data);
+		printf("char_data = %c\n", plist->test_char_data);
 	}
 	
 	//getchar();
