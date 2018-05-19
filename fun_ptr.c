@@ -64,7 +64,7 @@ int main()
 	while(1)
 	{
 		gets(val);
-		cmd_ptr = find_cmd(val);
+		cmd_ptr = find_cmd(val);
 			
 		if(cmd_ptr)
 		{
