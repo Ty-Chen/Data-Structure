@@ -4,10 +4,17 @@
 typedef struct s_list
 {
 	int val;
-	s_list *next;
+	struct s_list *next;
 }s_list;
 
-s_list *add_node(s_list *loc, s_list *node)
+
+int init_list(s_list *node)
+{
+	node->next = NULL;
+}
+
+
+int add_node(s_list *loc, s_list *node)
 {
 	if (node != NULL)
 	{
@@ -15,9 +22,10 @@ s_list *add_node(s_list *loc, s_list *node)
 		loc->next = node;		
 	}
 
+	return 0;
 }
 
-s_list *del_node(s_list *node)
+int del_node(s_list *node)
 {
 	if (node != NULL && node->next != NULL)
 	{
@@ -26,11 +34,31 @@ s_list *del_node(s_list *node)
 		node->val = temp->val;
 		temp = NULL;
 	}
-	else
+	else if (node->next == NULL)
+	{
 		node = NULL;
+	}
+
+	return 0;
+		
 }
 
 int main()
 {
-	
+	s_list head;	
+	init_list(&head);	
+	head.val = 0;
+
+	s_list node1;
+	add_node(&head, &node1);
+	node1.val = 1;
+	printf("123\n");
+
+	s_list *ptr = &head;
+	while (ptr != NULL)
+	{
+		printf("node value = %d\n", ptr->val);
+		ptr = ptr->next;
+	}
+	return 0;
 }
