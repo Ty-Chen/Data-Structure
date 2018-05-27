@@ -25,6 +25,8 @@ int add_node(s_list *loc, s_list *node)
 	return 0;
 }
 
+
+
 int del_node(s_list *node)
 {
 	if (node != NULL && node->next != NULL)
@@ -33,15 +35,19 @@ int del_node(s_list *node)
 		node->next = temp->next;
 		node->val = temp->val;
 		temp = NULL;
+		printf("node = %x\n", node);
 	}
 	else if (node->next == NULL)
 	{
 		node = NULL;
+		printf("node = %x\n", node);
+
 	}
 
 	return 0;
 		
 }
+
 
 int main()
 {
@@ -52,13 +58,27 @@ int main()
 	s_list node1;
 	add_node(&head, &node1);
 	node1.val = 1;
-	printf("123\n");
 
+	printf("\n----------test for add------------\n");
 	s_list *ptr = &head;
 	while (ptr != NULL)
 	{
 		printf("node value = %d\n", ptr->val);
 		ptr = ptr->next;
 	}
+
+	
+	printf("\n----------test for delete------------\n");
+	ptr = &head;
+	
+	del_node(&node1);
+	while (ptr != NULL)
+	{
+		printf("node = %x\n", ptr);
+		printf("node value = %d\n",  ptr->val);
+		ptr = ptr->next;
+	}	
+	
 	return 0;
 }
+
