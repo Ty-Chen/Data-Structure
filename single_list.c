@@ -39,8 +39,12 @@ int del_node(s_list *node)
 	}
 	else if (node->next == NULL)
 	{
+		//free(node);
+		node->next = NULL;
+		node->val = NULL;	
 		node = NULL;
-		printf("node = %x\n", node);
+	
+		printf("node now = %x\n", node);
 
 	}
 
