@@ -54,6 +54,16 @@ int main()
 		printf("\nint_data = %d\n", plist->test_int_data);
 		printf("char_data = %c\n", plist->test_char_data);
 	}
+
+
+	list_del(&data2.list);
+	
+	list_for_each( pos, &head)
+	{
+		data_list *plist = list_entry(pos, data_list, list);
+		printf("\nint_data = %d\n", plist->test_int_data);
+		printf("char_data = %c\n", plist->test_char_data);
+	}
 	
 	//getchar();
 }
