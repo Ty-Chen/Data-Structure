@@ -52,29 +52,42 @@ static rbnode* rbt_findMax(rb_root * T, rbnode* t);
 *************************************************************************************/
 
 
-static rbnode* rbt_findMin(rb_root * T, rbnode* t){
-    if(t == T->nil) return T->nil;
+static rbnode* rbt_findMin(rb_root * T, rbnode* t)
+{
+    if(t == T->nil) 
+	{
+		return T->nil;
+	}
 
     while(t->left != T->nil)
+	{
         t = t->left;
+	}
     return t;
 }
-static rbnode* rbt_findMax(rb_root * T, rbnode* t){
-    if(t == T->nil) return T->nil;
+
+static rbnode* rbt_findMax(rb_root * T, rbnode* t)
+{
+    if(t == T->nil) 
+	{
+		return T->nil;
+	}
 
     while(t->right != T->nil)
+	{
         t = t->right;
+	}
     return t;
 }
 
 rb_root *rbt_init()
 {
 	rb_root *T;
-	T = (rb_root*)malloc(sizeof(rb_root));
+	T = (rb_root*) malloc(sizeof(rb_root));
     assert( NULL != T);
 
     //用一个哨兵代表NIL。
-    T->nil = (rbnode*)malloc(sizeof(rbnode));
+    T->nil = (rbnode*) malloc(sizeof(rbnode));
     assert(NULL != T->nil);
     T->nil->color = BLACK;
     T->nil->left = T->nil->right = NULL;
