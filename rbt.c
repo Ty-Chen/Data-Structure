@@ -373,8 +373,6 @@ void rbt_left_rotate( rb_root* T, rbnode* x){
     if(x->right != T->nil)
         x->right->p = x;
 
-
-
     y->p = x->p;
     if(y->p == T->nil){
         T->root = y;
