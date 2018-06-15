@@ -132,25 +132,33 @@ void rbt_handleReorient(rb_root* T, rbnode* x, int k){
     x->left->color = x->right->color = BLACK;
 
     //如果x.p为红色，那么x.p一定不是根，x.p.p一定不是T.nil，而且为黑色
-    if(  RED == x->p->color){
+    if(  RED == x->p->color)
+	{
         x->p->p->color = RED;//此时x, p, x.p.p都为红
 
-        if(x->p->key < x->p->p->key){
-            if(k > x->p->key){
+        if(x->p->key < x->p->p->key)
+		{
+            if(k > x->p->key)
+			{
                 x->color = BLACK;//小心地处理颜色
                 rbt_left_rotate(T,x->p);
                 rbt_right_rotate(T,x->p);
-            }else{
+            }
+			else
+			{
                 x->p->color = BLACK;//小心地处理颜色
                 rbt_right_rotate(T,x->p->p);
             }
-
-        }else{
-            if(k < x->p->key){
+        }else
+		{
+            if(k < x->p->key)
+			{
                 x->color = BLACK;
                 rbt_right_rotate(T,x->p);
                 rbt_left_rotate(T,x->p);
-            }else{
+            }
+			else
+			{
                 x->p->color = BLACK;
                 rbt_left_rotate(T,x->p->p);
             }
@@ -160,6 +168,7 @@ void rbt_handleReorient(rb_root* T, rbnode* x, int k){
 
     T->root->color = BLACK;//无条件令根为黑色
 }
+
 /*
 *@brief brt_insert 插入
 *1 新插入的结点一定是红色的，如果是黑色的，会破坏条件4（每个结点到null叶结点的每条路径有同样数目的黑色结点）
@@ -178,7 +187,9 @@ rb_root* rbt_insert(rb_root* &T, int k){
         //保证没有一对兄弟同时为红色， 为什么要这么做？
         if(x != T->nil)         
             if(x->left->color == RED && x->right->color == RED)
+			{
                 rbt_handleReorient(T,x,k);
+			}
 
         p = x;
         if(k<x->key)
