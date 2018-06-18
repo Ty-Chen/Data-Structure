@@ -185,18 +185,25 @@ rb_root* rbt_insert(rb_root* &T, int k){
     while( x != T->nil){        
         //
         //保证没有一对兄弟同时为红色， 为什么要这么做？
-        if(x != T->nil)         
+        if(x != T->nil)
+		{
             if(x->left->color == RED && x->right->color == RED)
 			{
                 rbt_handleReorient(T,x,k);
 			}
-
+		}
+		
         p = x;
         if(k<x->key)
+		{
             x = x->left;
+		}
         else if(k>x->key)
+		{
             x = x->right;
-        else{
+		}
+        else
+		{
             printf("\n%d已存在\n",k);
             return T;
         }
@@ -213,12 +220,18 @@ rb_root* rbt_insert(rb_root* &T, int k){
 
     //让x的父亲指向x
     if(T->root == T->nil)
-        T->root = x;        
+	{
+        T->root = x; 
+	}
     else if(k < p->key)
+	{
         p->left = x;
+	}
     else
+	{
         p->right = x;
-
+	}
+	
     //因为一路下来，如果x的父亲是红色，那么x的叔叔肯定不是红色了，这个时候只需要做一下翻转即可。
     rbt_handleReorient(T,x,k);
 
