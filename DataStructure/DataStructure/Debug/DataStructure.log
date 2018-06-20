@@ -1,0 +1,32 @@
+﻿  main.c
+e:\nat\data-structure\list.h : warning C4819: 该文件包含不能在当前代码页(936)中表示的字符。请将该文件保存为 Unicode 格式以防止数据丢失
+e:\nat\data-structure\list.h(5): warning C4142: "size_t": 类型的良性重定义
+  g:\vs2017\vc\tools\msvc\14.13.26128\include\vcruntime.h(184): note: 参见“size_t”的声明
+e:\nat\data-structure\list.h(8): warning C4005: “offsetof”: 宏重定义
+  c:\program files (x86)\windows kits\10\include\10.0.16299.0\ucrt\stddef.h(44): note: 参见“offsetof”的前一个定义
+e:\nat\data-structure\list.h(57): error C2037: “next”的左侧部分指定未定义的结构/联合“list_head”
+e:\nat\data-structure\list.h(58): error C2037: “prev”的左侧部分指定未定义的结构/联合“list_head”
+e:\nat\data-structure\list.h(86): error C2037: “prev”的左侧部分指定未定义的结构/联合“list_head”
+e:\nat\data-structure\list.h(87): error C2037: “next”的左侧部分指定未定义的结构/联合“list_head”
+e:\nat\data-structure\list.h(88): error C2037: “prev”的左侧部分指定未定义的结构/联合“list_head”
+e:\nat\data-structure\list.h(89): error C2037: “next”的左侧部分指定未定义的结构/联合“list_head”
+e:\nat\data-structure\list.h(103): error C2037: “next”的左侧部分指定未定义的结构/联合“list_head”
+e:\nat\data-structure\list.h(103): error C2198: “__list_add”: 用于调用的参数太少
+e:\nat\data-structure\list.h(117): error C2037: “prev”的左侧部分指定未定义的结构/联合“list_head”
+e:\nat\data-structure\list.h(117): error C2198: “__list_add”: 用于调用的参数太少
+e:\nat\data-structure\list.h(129): error C2037: “prev”的左侧部分指定未定义的结构/联合“list_head”
+e:\nat\data-structure\list.h(130): error C2037: “next”的左侧部分指定未定义的结构/联合“list_head”
+e:\nat\data-structure\list.h(141): error C2037: “prev”的左侧部分指定未定义的结构/联合“list_head”
+e:\nat\data-structure\list.h(141): error C2037: “next”的左侧部分指定未定义的结构/联合“list_head”
+e:\nat\data-structure\list.h(141): error C2198: “__list_del”: 用于调用的参数太少
+e:\nat\data-structure\list.h(142): error C2037: “next”的左侧部分指定未定义的结构/联合“list_head”
+e:\nat\data-structure\list.h(143): error C2037: “prev”的左侧部分指定未定义的结构/联合“list_head”
+e:\nat\data-structure\list.h(152): error C2037: “next”的左侧部分指定未定义的结构/联合“list_head”
+e:\nat\data-structure\list.h(152): warning C4033: “list_empty”必须返回值
+e:\nat\data-structure\list.h(157): error C2037: “next”的左侧部分指定未定义的结构/联合“list_head”
+e:\nat\data-structure\list.h(158): error C2037: “prev”的左侧部分指定未定义的结构/联合“list_head”
+e:\nat\data-structure\list.h(159): error C2037: “next”的左侧部分指定未定义的结构/联合“list_head”
+e:\nat\data-structure\list.h(160): error C2037: “prev”的左侧部分指定未定义的结构/联合“list_head”
+e:\nat\data-structure\list.h(161): error C2037: “next”的左侧部分指定未定义的结构/联合“list_head”
+e:\nat\data-structure\list.h(162): error C2037: “next”的左侧部分指定未定义的结构/联合“list_head”
+e:\nat\data-structure\list.h(163): error C2037: “prev”的左侧部分指定未定义的结构/联合“list_head”

@@ -4,7 +4,7 @@
 
 int main()
 {
-	struct list_head list;
+	//struct list_head Head;
 	printf("complete a simple list\n");
 	getchar();
 }

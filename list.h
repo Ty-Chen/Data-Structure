@@ -54,7 +54,7 @@ struct list_head {
 /*链表初始化：头尾均是自身*/
 static inline void INIT_LIST_HEAD(struct list_head *list)
 {
-    list->next = list;
+	list->next = list;
     list->prev = list;
 }
 
