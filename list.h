@@ -13,7 +13,7 @@ typedef unsigned long size_t;
  * @type:       the type of the container struct this is embedded in.
  * @member:     the name of the member within the struct.
  *
- * 著名内核源码函数，经常见到，作用是获取type类型中member变量的内存位置
+ * 著名内核源码函数，经常见到，作用是根据type类型中member的位置获得结构的首地址
  * It takes three arguments – a pointer, type of the container,
  * and the name of the member the pointer refers to. 
  * The macro will then expand to a new address pointing 
@@ -38,6 +38,7 @@ struct list_head {
 
 #define LIST_HEAD_INIT(name) { &(name), &(name) }
 
+/**/
 #define LIST_HEAD(name) \
 	struct list_head name = LIST_HEAD_INIT(name)
 
