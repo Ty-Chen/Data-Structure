@@ -40,7 +40,7 @@ void test2()
 
 int main()
 {
-  test1();
-  test2();
-  getchar();
+	test1();
+	test2();
+	getchar();
 }
