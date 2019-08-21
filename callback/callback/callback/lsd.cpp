@@ -39,7 +39,7 @@ void lsd::notify()
 	std::list<IListenner*>::iterator it;
 	for (it = listenners.begin(); it != listenners.end(); it++)
 	{
-		(*it)->onTecherComming(m_table);
+		(*it)->onNotify(m_table);
 	}
 }
 

@@ -4,7 +4,7 @@
 class IListenner
 {
 public:
-	virtual void onTecherComming(int value) = 0;
+	virtual void onNotify(int value) = 0;
 };
 
 class INotifier
