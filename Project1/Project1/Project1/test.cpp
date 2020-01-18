@@ -1,7 +1,7 @@
 #include "hasher.hpp"
 #include <iostream>
 
-#define PROTOCOL_STRING "DolitBT-DLBT\0\0\0\0\0\0\0"
+#define PROTOCOL_STRING "BT\0\0\0\0\0\0\0"
 
 char *Read(char *filePath, DWORD *size)
 {
