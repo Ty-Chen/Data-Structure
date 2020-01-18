@@ -24,7 +24,7 @@ char *Read(char *filePath, DWORD *size)
 		return FALSE;
 	}
 
-	//µÃµ½ÎÄ¼şµÄ´óĞ¡
+	//å¾—åˆ°æ–‡ä»¶çš„å¤§å°
 	fileSize = GetFileSize(pFile, NULL);          
 	*size = fileSize;
 
@@ -36,7 +36,7 @@ char *Read(char *filePath, DWORD *size)
 
 	do {                                       
 		
-		//Ñ­»·¶ÁÎÄ¼ş£¬È·±£¶Á³öÍêÕûµÄÎÄ¼ş    
+		//å¾ªç¯è¯»æ–‡ä»¶ï¼Œç¡®ä¿è¯»å‡ºå®Œæ•´çš„æ–‡ä»¶    
 		ReadFile(pFile, tmpBuf, dwBytesToRead, &dwBytesRead, NULL);
 
 		if (dwBytesRead == 0)
@@ -47,7 +47,7 @@ char *Read(char *filePath, DWORD *size)
 
 	} while (dwBytesToRead > 0);
 
-	//  TODO ´¦Àí¶Áµ½µÄÊı¾İ buffer
+	//  TODO å¤„ç†è¯»åˆ°çš„æ•°æ® buffer
 	//free(buffer);
 	CloseHandle(pFile);
 
@@ -94,7 +94,7 @@ int main()
 {
 	DWORD size = 0;
 	char *buffer = NULL;
-	char filePath[] = "jx3hd_c_1.0.0.1319-to-1.0.0.1321_zhcn_hd_patch.exe.torrent";
+	char filePath[] = "jxxxx.torrent";
 
 	buffer = Read(filePath, &size);
 	hasher hs(buffer, size);
