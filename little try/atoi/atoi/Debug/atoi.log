@@ -1,0 +1,8 @@
+﻿  main.cpp
+e:\vs project\little try\atoi\atoi\main.cpp(66): warning C4018: “<”: 有符号/无符号不匹配
+e:\vs project\little try\atoi\atoi\main.cpp(108): warning C4018: “<”: 有符号/无符号不匹配
+e:\vs project\little try\atoi\atoi\main.cpp(144): warning C4018: “<”: 有符号/无符号不匹配
+e:\vs project\little try\atoi\atoi\main.cpp(374): warning C4018: “>=”: 有符号/无符号不匹配
+e:\vs project\little try\atoi\atoi\main.cpp(378): warning C4018: “<”: 有符号/无符号不匹配
+e:\vs project\little try\atoi\atoi\main.cpp(382): warning C4018: “<”: 有符号/无符号不匹配
+  atoi.vcxproj -> E:\VS Project\little try\atoi\Debug\atoi.exe
