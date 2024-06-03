@@ -19,8 +19,9 @@
 
 char sz_test[COLUMN][LINE];
 
-#define QD  64
-#define BS  (32*1024)
+#define SQNUM 16
+#define QD  4
+#define BS  (BUF_SIZE / SQNUM)
 
 static int infd, outfd;
 
@@ -282,7 +283,53 @@ int test_io_uring_sqe() {
     return 0;
 }
 
-#define SQNUM 128
+static int inflight = 0;
+
+#define COLUMN_OFFSET   COLUMN / SQNUM;
+
+static int write_to_file(int fd, struct io_uring* ring) {
+    int insize = BUF_SIZE;
+    struct io_uring_cqe* cqe;
+    struct io_uring_sqe* sqe;
+    size_t this_size;
+    off_t offset = 0;
+    int   column = 0;
+
+    while (insize) {
+         int has_inflight = inflight;
+         int depth;
+
+         while (insize && inflight < SQNUM) {
+              this_size = BS;
+
+              if (this_size > insize)
+                  this_size = insize;
+
+              sqe = io_uring_get_sqe(ring);
+              io_uring_prep_write(sqe, fd, sz_test[column], this_size, offset);
+
+              offset += this_size;
+              insize -= this_size;
+              column += COLUMN_OFFSET;
+              inflight++;
+         }
+
+         if (has_inflight != inflight)
+             io_uring_submit(ring);
+
+         if (insize)
+             depth = SQNUM;
+         else
+             depth = 1;
+
+         while (inflight >= depth) {
+             io_uring_wait_cqe(ring, &cqe);
+             inflight--;
+         }
+    }
+
+    return 0;
+}
 
 void test_io_uring_write() {
     struct io_uring ring;
@@ -299,28 +346,34 @@ void test_io_uring_write() {
     fd = open("tmp_file.csv", O_WRONLY | O_TRUNC | O_CREAT | O_DIRECT, 0644);
     ret = ftruncate(fd, BUF_SIZE);
 
-    sqe = io_uring_get_sqe(&ring);
+    write_to_file(fd, &ring);
 
-    offset = BUF_SIZE / SQNUM;
+    //sqe = io_uring_get_sqe(&ring);
 
-    for (int i = 0; i < SQNUM; ++i) {
-        io_uring_prep_write(sqe, fd, sz_test + offset * i, offset, offset * i);
-        ret = io_uring_submit(&ring);
-    }
-    
-    int cnt = SQNUM;
-
-    while (cnt) {
-        ret = io_uring_wait_cqe(&ring, &cqe);
-        if (!ret) {
-            printf("cqe->res: %d\n", cqe->res);
-        }
-        cnt--;
-    }
+//     offset = BUF_SIZE / SQNUM;
+//     auto pos = COLUMN / SQNUM;
+// 
+//     for (int i = 0; i < SQNUM; ++i) {
+//         sqe = io_uring_get_sqe(ring);
+//         io_uring_prep_write(sqe, fd, sz_test[pos * i], offset, -1);
+//         io_uring_sqe_set_data(sqe, sz_test[pos * i]);
+//     }
+//     ret = io_uring_submit(&ring);
+// 
+//     int cnt = SQNUM;
+// 
+//     while (cnt) {
+//         ret = io_uring_wait_cqe(&ring, &cqe);
+//         if (!ret) {
+//             printf("cqe->res: %d\n", cqe->res);
+//         }
+//         cnt--;
+//         io_uring_cqe_seen(&ring, cqe);
+//     }
 
     auto end = std::chrono::steady_clock::now();
     std::cout << "io_uring : " << std::chrono::duration_cast<std::chrono::milliseconds>(end - start).count() << " ms" << std::endl;
-    io_uring_cqe_seen(&ring, cqe);
+    //io_uring_cqe_seen(&ring, cqe);
 
     io_uring_queue_exit(&ring);
     close(fd);
@@ -379,18 +432,21 @@ int test_normal_read_write() {
 }
 
 int main() {
-
+    char buf[32];
     for (int i = 0; i < COLUMN; ++i) {
-        strcpy(sz_test[i], "hello world\n");
+        sprintf(buf, "hello world %d\n", i);
+        strcpy(sz_test[i], buf);
     }
+
+//     std::cout << std::endl << "ofstream : ";
+//     test_normal_write();
 
     test_io_uring_write();
 
 //     std::cout << std::endl << "io_uring cpy file" << std::endl;
 //     test_io_uring_sqe();
 
-    std::cout << std::endl << "ofstream : " ;
-    test_normal_write();
+
 
 //     std::cout << std::endl << "normal cpy file" << std::endl;
 //     test_normal_read_write();
